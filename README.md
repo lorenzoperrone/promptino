@@ -1,5 +1,10 @@
 # Promptino
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
+[![Platform](https://img.shields.io/badge/Platform-Windows%20x64-0078D4?logo=windows)](Promptino.App/Properties/PublishProfiles/win-x64-release.pubxml)
+[![Avalonia](https://img.shields.io/badge/UI-Avalonia-8B5CF6?logo=avalonia)](https://www.avaloniaui.net/)
+
 Promptino is a lightweight, clean, and customizable overlay teleprompter designed for video calls, presentations, and screen sharing. It floats above your active windows with adjustable transparency, allowing you to read your script smoothly while keeping eye contact with your camera.
 
 ## Key Features
@@ -15,7 +20,7 @@ Promptino is a lightweight, clean, and customizable overlay teleprompter designe
 
 ## Quick Start
 
-1. Go to the latest Release page on GitHub and download the packaged files.
+1. Go to the [latest Release page](https://github.com/lorenzoperrone/promptino/releases) and download the packaged files.
 2. Launch `Promptino.App.exe`.
 3. Load a text file containing your script using the main control panel.
 4. Set your preferred reading speed, size, and theme.
@@ -39,9 +44,18 @@ dotnet publish Promptino.App/Promptino.App.csproj -p:PublishProfile=win-x64-rele
 ```
 The compiled outputs will be located under `Promptino.App/bin/Release/net10.0/publish/win-x64/`.
 
+### Running Tests
+```powershell
+dotnet test Promptino.App.Tests/Promptino.App.Tests.csproj
+```
+
+## Contributing
+
+Contributions are welcome. Feel free to open issues, suggest improvements, or submit pull requests.
+
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
