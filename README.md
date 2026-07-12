@@ -7,6 +7,8 @@
 
 Promptino is a lightweight, clean, and customizable overlay teleprompter designed for video calls, presentations, and screen sharing. It floats above your active windows with adjustable transparency, allowing you to read your script smoothly while keeping eye contact with your camera.
 
+<img width="2816" height="1536" alt="2  Alternate Logo" src="https://github.com/user-attachments/assets/c523ec2d-a8c5-400d-b465-f1cca6b763bf" />
+
 ## Key Features
 
 - **Floating Overlay**: Stays on top of active windows with adjustable opacity, size, and reading margins.
