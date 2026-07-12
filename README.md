@@ -13,6 +13,8 @@ Promptino is a lightweight, clean, and customizable overlay teleprompter designe
 
 - **Floating Overlay**: Stays on top of active windows with adjustable opacity, size, and reading margins.
 - **Reading Guide**: Highlighting line and background bands to help keep your place.
+- **Horizontal Mirror Mode**: Flip the text horizontally for use with teleprompter glass or beam-splitter setups.
+- **Markers**: Navigate between script sections with `[[marker:Label]]` syntax.
 - **Dynamic Speed Calibration**: Set speed in Words Per Minute (WPM) with easy speed adjustments during playback.
 - **Remote Controller**: A compact remote window that lets you start, pause, reset, or skip between script markers.
 - **Global Hotkeys**: Control the teleprompter with keyboard shortcuts even when the window is not focused.
@@ -24,7 +26,7 @@ Promptino is a lightweight, clean, and customizable overlay teleprompter designe
 
 1. Go to the [latest Release page](https://github.com/lorenzoperrone/promptino/releases) and download the packaged files.
 2. Launch `Promptino.App.exe`.
-3. Load a text file containing your script using the main control panel.
+3. Load a script (`.txt`, `.md`, `.srt`, `.vtt`) using the main control panel.
 4. Set your preferred reading speed, size, and theme.
 5. Press Play or use the configured hotkeys to start teleprompting.
 

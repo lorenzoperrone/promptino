@@ -38,7 +38,7 @@ public sealed class ScriptLoaderService
             var extension = Path.GetExtension(path);
             if (!SupportedExtensions.Contains(extension, StringComparer.OrdinalIgnoreCase))
             {
-                return ScriptLoadResult.Fail("Unsupported file type. Choose a .txt or .md file.");
+                return ScriptLoadResult.Fail("Unsupported file type. Supported formats: .txt, .md, .srt, .vtt.");
             }
 
             var raw = await _fileReader.ReadAllTextAsync(path, cancellationToken);
