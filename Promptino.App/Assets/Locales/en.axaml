@@ -1,0 +1,179 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="using:System">
+  <!-- Brand & General -->
+  <sys:String x:Key="AppName">Promptino</sys:String>
+  <sys:String x:Key="AppTagline">Your tiny teleprompter overlay</sys:String>
+  <sys:String x:Key="AppDescription">Local script teleprompter with fast setup, readable playback, and local-only persistence.</sys:String>
+  
+  <!-- Window Titles -->
+  <sys:String x:Key="ControlPanelTitle">Promptino Control Panel</sys:String>
+  <sys:String x:Key="PrompterTitle">Promptino Prompter</sys:String>
+  <sys:String x:Key="RemoteTitle">Promptino Remote</sys:String>
+
+  <!-- Common Buttons & Actions -->
+  <sys:String x:Key="BtnLoadScript">Load Script</sys:String>
+  <sys:String x:Key="BtnEditScript">Edit Script</sys:String>
+  <sys:String x:Key="BtnShowPrompter">Show Prompter</sys:String>
+  <sys:String x:Key="BtnHidePrompter">Hide Prompter</sys:String>
+  <sys:String x:Key="BtnShowRemote">Show Remote</sys:String>
+  <sys:String x:Key="BtnHideRemote">Hide Remote</sys:String>
+  <sys:String x:Key="BtnApply">Apply</sys:String>
+  <sys:String x:Key="BtnBrowse">Browse...</sys:String>
+  <sys:String x:Key="BtnRecord">Record</sys:String>
+  <sys:String x:Key="BtnRecording">Press keys...</sys:String>
+
+  <!-- Playback Card -->
+  <sys:String x:Key="CardPlayback">Playback</sys:String>
+  <sys:String x:Key="BtnPlay">Play</sys:String>
+  <sys:String x:Key="BtnPause">Pause</sys:String>
+  <sys:String x:Key="BtnReset">Reset</sys:String>
+  <sys:String x:Key="BtnPrevMarker">Prev Marker</sys:String>
+  <sys:String x:Key="BtnNextMarker">Next Marker</sys:String>
+  
+  <sys:String x:Key="TooltipPlay">Start scrolling (Space or Global Hotkey)</sys:String>
+  <sys:String x:Key="TooltipPause">Pause scrolling (Space or Global Hotkey)</sys:String>
+  <sys:String x:Key="TooltipReset">Reset playback to start (R)</sys:String>
+  <sys:String x:Key="TooltipPrevMarker">Go to previous marker (PageUp or Global Hotkey)</sys:String>
+  <sys:String x:Key="TooltipNextMarker">Go to next marker (PageDown or Global Hotkey)</sys:String>
+  
+  <sys:String x:Key="LabelSpeed">Speed: {0} WPM</sys:String>
+  <sys:String x:Key="LabelSmoothScrolling">Smooth Scrolling Mode</sys:String>
+  <sys:String x:Key="DriverStatus">Active driver: {0}</sys:String>
+  <sys:String x:Key="DriverInfo">Render-aligned follows compositor commits. Oversampled timer is an experimental higher-frequency UI timer.</sys:String>
+  <sys:String x:Key="ChkHighPerformance">High-performance text scrolling</sys:String>
+  
+  <!-- Drivers -->
+  <sys:String x:Key="DriverIdle">idle</sys:String>
+  <sys:String x:Key="DriverCompositor">compositor</sys:String>
+  <sys:String x:Key="DriverOversampled">oversampled timer</sys:String>
+  <sys:String x:Key="DriverFallback">timer (fallback)</sys:String>
+
+  <!-- Markers Card -->
+  <sys:String x:Key="CardMarkers">Script Markers</sys:String>
+  <sys:String x:Key="PlaceholderMarkerName">Marker Name</sys:String>
+  <sys:String x:Key="BtnAddMarker">Add Marker</sys:String>
+  <sys:String x:Key="BtnRenameMarker">Rename</sys:String>
+  <sys:String x:Key="BtnDeleteMarker">Delete</sys:String>
+  <sys:String x:Key="BtnJumpToMarker">Jump To</sys:String>
+  <sys:String x:Key="MarkersInfo">Markers added here are session-only and will not modify the source file.</sys:String>
+
+  <!-- Reading Surface Card -->
+  <sys:String x:Key="CardReadingSurface">Reading Surface</sys:String>
+  <sys:String x:Key="LabelAppTheme">App Theme:</sys:String>
+  <sys:String x:Key="ThemeLight">Light</sys:String>
+  <sys:String x:Key="ThemeDark">Dark</sys:String>
+  
+  <sys:String x:Key="LabelColorTheme">Color Theme:</sys:String>
+  <sys:String x:Key="PresetDefault">Default (Promptino Dark)</sys:String>
+  <sys:String x:Key="PresetDracula">Dracula</sys:String>
+  <sys:String x:Key="PresetNord">Nord</sys:String>
+  <sys:String x:Key="PresetGruvbox">Gruvbox Dark</sys:String>
+  <sys:String x:Key="PresetSolarized">Solarized Dark</sys:String>
+  <sys:String x:Key="PresetMonokai">Monokai</sys:String>
+  <sys:String x:Key="PresetMatrix">Matrix Green</sys:String>
+  <sys:String x:Key="PresetColorblind">Colorblind Safe (Blue/Yellow)</sys:String>
+
+  <sys:String x:Key="LabelReadingGuide">Reading Guide:</sys:String>
+  <sys:String x:Key="GuideNone">None</sys:String>
+  <sys:String x:Key="GuideLine">Line Only</sys:String>
+  <sys:String x:Key="GuideBand">Highlight Band Only</sys:String>
+  <sys:String x:Key="GuideBoth">Both (Line + Band)</sys:String>
+
+  <sys:String x:Key="LabelTextAlignment">Text Alignment:</sys:String>
+  <sys:String x:Key="AlignLeft">Left</sys:String>
+  <sys:String x:Key="AlignCenter">Center</sys:String>
+  <sys:String x:Key="AlignRight">Right</sys:String>
+  <sys:String x:Key="AlignJustified">Justified</sys:String>
+
+  <sys:String x:Key="ChkAlwaysOnTop">Keep Prompter On Top</sys:String>
+  <sys:String x:Key="ChkScreenShareSafe">Screen-Share Safe Mode (hide from capture)</sys:String>
+  <sys:String x:Key="ChkMirrorText">Mirror Text Horizontally</sys:String>
+  
+  <sys:String x:Key="LabelTextSize">Text Size: {0}</sys:String>
+  <sys:String x:Key="LabelWindowOpacity">Prompter Opacity: {0}%</sys:String>
+  <sys:String x:Key="LabelReadingMargin">Reading Margin: {0}px</sys:String>
+
+  <!-- Script Cleanup Card -->
+  <sys:String x:Key="CardCleanup">Script Cleanup Preview</sys:String>
+  <sys:String x:Key="CleanupInfo">Preview cleanup before sending the result to the prompter. Source files are never modified.</sys:String>
+  <sys:String x:Key="ChkCleanupTimestamps">Remove timestamps and subtitle cue numbers</sys:String>
+  <sys:String x:Key="ChkCleanupMetadata">Remove metadata rows and front matter</sys:String>
+  <sys:String x:Key="ChkCleanupTables">Flatten markdown tables into readable text</sys:String>
+  <sys:String x:Key="BtnPreviewCleanup">Refresh Preview</sys:String>
+  <sys:String x:Key="BtnApplyCleanup">Apply Cleanup To Prompter</sys:String>
+  <sys:String x:Key="BtnRestoreOriginal">Restore Loaded Script</sys:String>
+  
+  <sys:String x:Key="CleanupStateLoaded">Cleanup: loaded script active</sys:String>
+  <sys:String x:Key="CleanupStateCleaned">Cleanup: cleaned script active in prompter</sys:String>
+  <sys:String x:Key="CleanupStatePreviewReady">Cleanup: preview ready, loaded script still active</sys:String>
+  
+  <sys:String x:Key="LabelOriginalSource">Original source</sys:String>
+  <sys:String x:Key="LabelCleanedPreview">Cleaned preview</sys:String>
+
+  <!-- Warnings Card -->
+  <sys:String x:Key="CardWarnings">Warnings and Recovery</sys:String>
+
+  <!-- Global Hotkeys Card -->
+  <sys:String x:Key="CardHotkeys">Global Hotkeys</sys:String>
+  <sys:String x:Key="LabelPlayPauseHotkey">Play/Pause Hotkey:</sys:String>
+  <sys:String x:Key="LabelNextMarkerHotkey">Next Marker Hotkey:</sys:String>
+  <sys:String x:Key="LabelPrevMarkerHotkey">Prev Marker Hotkey:</sys:String>
+  <sys:String x:Key="BtnApplyHotkeys">Apply Hotkeys</sys:String>
+
+  <!-- External Editor Card -->
+  <sys:String x:Key="CardExternalEditor">External Editor</sys:String>
+  <sys:String x:Key="ExternalEditorInfo">Configure the executable path of your favorite text editor (e.g., VS Code, Notepad++). Leave blank for default (Notepad).</sys:String>
+
+  <!-- Profiles Card -->
+  <sys:String x:Key="CardProfiles">Profiles</sys:String>
+  <sys:String x:Key="PlaceholderProfileName">Profile name</sys:String>
+  <sys:String x:Key="BtnSaveProfile">Save Profile</sys:String>
+  <sys:String x:Key="BtnLoadProfile">Load Profile</sys:String>
+  <sys:String x:Key="BtnDeleteProfile">Delete Profile</sys:String>
+
+  <!-- Remote Window -->
+  <sys:String x:Key="RemoteSpeedLabel">SPEED</sys:String>
+  <sys:String x:Key="RemoteWpmLabel">WPM</sys:String>
+  <sys:String x:Key="RemoteEditButton">EDIT</sys:String>
+  <sys:String x:Key="RemoteStatusPlaying">Playing</sys:String>
+  <sys:String x:Key="RemoteStatusPaused">Paused</sys:String>
+  <sys:String x:Key="RemoteStatusReady">Ready</sys:String>
+
+  <sys:String x:Key="BtnRemotePlay">▶ Play</sys:String>
+  <sys:String x:Key="BtnRemotePause">⏸ Pause</sys:String>
+  <sys:String x:Key="BtnRemoteReset">⏹ Reset</sys:String>
+  <sys:String x:Key="BtnRemotePrev">◀ Marker</sys:String>
+  <sys:String x:Key="BtnRemoteNext">Marker ▶</sys:String>
+
+  <!-- Messages & System Logs (C#) -->
+  <sys:String x:Key="MsgNoScriptLoaded">No script loaded.</sys:String>
+  <sys:String x:Key="MsgDefaultSpeedSaved">Default speed saved: {0} WPM</sys:String>
+  <sys:String x:Key="MsgCalibrationSkipped">Calibration skipped. You can start reading now.</sys:String>
+  <sys:String x:Key="MsgOpenedExternalEditor">Opened in external editor: {0}</sys:String>
+  <sys:String x:Key="MsgFailedExternalEditor">Failed to open in external editor.</sys:String>
+  <sys:String x:Key="MsgLoadedScript">Loaded: {0}</sys:String>
+  <sys:String x:Key="MsgAutoReloaded">Auto-reloaded: {0}</sys:String>
+  <sys:String x:Key="MsgSettingsSaveFailure">Could not save preferences locally. Changes apply this session only.</sys:String>
+  <sys:String x:Key="MsgSettingsRecovery">Local settings were unavailable, so safe defaults were loaded for this session.</sys:String>
+  
+  <sys:String x:Key="WarnLoadScriptFirst">Load a script first, then press Play.</sys:String>
+  <sys:String x:Key="WarnPressKeys">Press a combination of keys (e.g. Ctrl+Alt+Space). Esc to cancel.</sys:String>
+  <sys:String x:Key="WarnUnsupportedKey">Unsupported key for shortcuts. Try again or press Esc.</sys:String>
+  <sys:String x:Key="WarnModifierRequired">Global shortcuts require at least one modifier key (Ctrl, Alt, Shift, Win). Try again.</sys:String>
+  <sys:String x:Key="WarnAlwaysOnTopApplyFailure">Always-on-top preference saved, but this session could not apply it.</sys:String>
+  <sys:String x:Key="WarnLoadScriptFirstEdit">Load a script first, then try editing again.</sys:String>
+  <sys:String x:Key="WarnProfilesReadRecovery">Profiles could not be read and were reset for this session.</sys:String>
+  <sys:String x:Key="WarnProfilesSaveFailure">Could not save profiles locally. Changes were not persisted.</sys:String>
+  <sys:String x:Key="WarnProfilesDeleteFailure">Could not update profiles locally. Delete was not persisted.</sys:String>
+  <sys:String x:Key="WarnProfileNameRequired">Profile name required.</sys:String>
+  <sys:String x:Key="LabelSmoothRenderAligned">Render-aligned (Recommended)</sys:String>
+  <sys:String x:Key="LabelSmoothOversampled">Oversampled timer (Experimental)</sys:String>
+
+  <sys:String x:Key="LabelAppLanguage">Language:</sys:String>
+  <sys:String x:Key="LangAuto">System Default (Auto)</sys:String>
+  <sys:String x:Key="LangEn">English</sys:String>
+  <sys:String x:Key="LangIt">Italian (Italiano)</sys:String>
+
+  <sys:String x:Key="DefaultMarkerName">Marker {0}</sys:String>
+</ResourceDictionary>

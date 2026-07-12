@@ -1,0 +1,237 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Promptino.App.ViewModels"
+        xmlns:core="clr-namespace:Promptino.Core.Playback;assembly=Promptino.Core"
+        x:DataType="vm:MainWindowViewModel"
+        mc:Ignorable="d"
+        x:Class="Promptino.App.MainWindow"
+        Width="600"
+        Height="700"
+        MinWidth="500"
+        MinHeight="550"
+        CanResize="True"
+        Title="{DynamicResource ControlPanelTitle}"
+        Icon="/Assets/promptino-icon.ico">
+
+  <Border Padding="16">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Spacing="12">
+      <Border Classes="section-card">
+        <StackPanel Spacing="6">
+          <TextBlock Text="{DynamicResource AppName}" FontSize="26" FontWeight="SemiBold" />
+          <TextBlock Text="{DynamicResource AppTagline}" FontSize="14" Opacity="0.7" Margin="0,-4,0,4" />
+          <TextBlock Classes="section-copy" Text="{DynamicResource AppDescription}" TextWrapping="Wrap" />
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="LoadScriptButton" Classes="primary-action" Content="{DynamicResource BtnLoadScript}" Height="36" Width="180" Click="LoadScriptButton_OnClick" HorizontalContentAlignment="Center" />
+            <Button x:Name="EditScriptButton" Content="{DynamicResource BtnEditScript}" Height="36" Width="180" Click="EditScriptButton_OnClick" HorizontalContentAlignment="Center" />
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="TogglePrompterButton" Content="{DynamicResource BtnShowPrompter}" Width="180" Height="34" Click="TogglePrompterButton_OnClick" HorizontalContentAlignment="Center"/>
+            <Button x:Name="ToggleRemoteButton" Content="{DynamicResource BtnShowRemote}" Width="180" Height="34" Click="ToggleRemoteButton_OnClick" HorizontalContentAlignment="Center"/>
+          </StackPanel>
+          <TextBlock Text="{Binding StatusMessage}" Classes="section-copy" Margin="0,2,0,0" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardPlayback}"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="PlayButton" Content="{DynamicResource BtnPlay}" Width="90" Click="PlayButton_OnClick" ToolTip.Tip="{DynamicResource TooltipPlay}"/>
+            <Button x:Name="PauseButton" Content="{DynamicResource BtnPause}" Width="90" Click="PauseButton_OnClick" ToolTip.Tip="{DynamicResource TooltipPause}"/>
+            <Button x:Name="ResetButton" Content="{DynamicResource BtnReset}" Width="90" Click="ResetButton_OnClick" ToolTip.Tip="{DynamicResource TooltipReset}"/>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="PrevMarkerButton" Content="{DynamicResource BtnPrevMarker}" Width="140" Click="PreviousMarkerButton_OnClick" ToolTip.Tip="{DynamicResource TooltipPrevMarker}"/>
+            <Button x:Name="NextMarkerButton" Content="{DynamicResource BtnNextMarker}" Width="140" Click="NextMarkerButton_OnClick" ToolTip.Tip="{DynamicResource TooltipNextMarker}"/>
+          </StackPanel>
+          <StackPanel Spacing="4">
+            <TextBlock x:Name="SpeedLabel" Text="Speed: 130 WPM" Opacity="0.85"/>
+            <Slider x:Name="SpeedSlider" Minimum="20" Maximum="500" Value="130" TickFrequency="5" IsSnapToTickEnabled="True"/>
+          </StackPanel>
+          <StackPanel Spacing="4">
+            <TextBlock Text="{DynamicResource LabelSmoothScrolling}" Opacity="0.85"/>
+            <ComboBox x:Name="PlaybackSmoothnessModeComboBox" SelectedIndex="0"/>
+            <TextBlock x:Name="PlaybackDriverStatusTextBlock" Text="Active driver: idle" Opacity="0.85"/>
+            <TextBlock Text="{DynamicResource DriverInfo}" Classes="section-copy" TextWrapping="Wrap"/>
+          </StackPanel>
+          <CheckBox x:Name="HighPerformanceTextScrollingCheckBox" Content="{DynamicResource ChkHighPerformance}" IsChecked="True"/>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardMarkers}"/>
+          <ListBox ItemsSource="{Binding ScriptMarkers}" Height="120" x:Name="MarkersListBox" Background="Transparent" BorderThickness="0">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="core:ScriptMarker">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="{Binding Label}" VerticalAlignment="Center"/>
+                  <TextBlock Grid.Column="1" Text="{Binding ProgressRatio, StringFormat={}{0:P0}}" Opacity="0.6" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                </Grid>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBox x:Name="MarkerLabelTextBox" PlaceholderText="{DynamicResource PlaceholderMarkerName}" Width="150" Height="34"/>
+            <Button x:Name="AddMarkerButton" Content="{DynamicResource BtnAddMarker}" Height="34" Click="AddMarkerButton_OnClick"/>
+            <Button x:Name="RenameMarkerButton" Content="{DynamicResource BtnRenameMarker}" Height="34" Click="RenameMarkerButton_OnClick"/>
+            <Button x:Name="DeleteMarkerButton" Content="{DynamicResource BtnDeleteMarker}" Height="34" Click="DeleteMarkerButton_OnClick"/>
+            <Button x:Name="JumpToMarkerButton" Content="{DynamicResource BtnJumpToMarker}" Height="34" Click="JumpToMarkerButton_OnClick"/>
+          </StackPanel>
+          <TextBlock Classes="section-copy" Text="{DynamicResource MarkersInfo}" TextWrapping="Wrap" Opacity="0.7"/>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardReadingSurface}"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="{DynamicResource LabelAppLanguage}" VerticalAlignment="Center" Opacity="0.85"/>
+            <ComboBox x:Name="LanguageComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="{DynamicResource LangAuto}" Tag="Auto"/>
+                <ComboBoxItem Content="{DynamicResource LangEn}" Tag="en"/>
+                <ComboBoxItem Content="{DynamicResource LangIt}" Tag="it"/>
+            </ComboBox>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="{DynamicResource LabelAppTheme}" VerticalAlignment="Center" Opacity="0.85"/>
+            <ComboBox x:Name="AppThemeComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="{DynamicResource ThemeLight}" Tag="Light"/>
+                <ComboBoxItem Content="{DynamicResource ThemeDark}" Tag="Dark"/>
+            </ComboBox>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="{DynamicResource LabelColorTheme}" VerticalAlignment="Center" Opacity="0.85"/>
+            <ComboBox x:Name="ColorPresetComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="{DynamicResource PresetDefault}"/>
+                <ComboBoxItem Content="{DynamicResource PresetDracula}"/>
+                <ComboBoxItem Content="{DynamicResource PresetNord}"/>
+                <ComboBoxItem Content="{DynamicResource PresetGruvbox}"/>
+                <ComboBoxItem Content="{DynamicResource PresetSolarized}"/>
+                <ComboBoxItem Content="{DynamicResource PresetMonokai}"/>
+                <ComboBoxItem Content="{DynamicResource PresetMatrix}"/>
+                <ComboBoxItem Content="{DynamicResource PresetColorblind}"/>
+            </ComboBox>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="{DynamicResource LabelReadingGuide}" VerticalAlignment="Center" Opacity="0.85"/>
+            <ComboBox x:Name="ReadingGuideComboBox" SelectedIndex="3">
+                <ComboBoxItem Content="{DynamicResource GuideNone}"/>
+                <ComboBoxItem Content="{DynamicResource GuideLine}"/>
+                <ComboBoxItem Content="{DynamicResource GuideBand}"/>
+                <ComboBoxItem Content="{DynamicResource GuideBoth}"/>
+            </ComboBox>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="{DynamicResource LabelTextAlignment}" VerticalAlignment="Center" Opacity="0.85"/>
+            <ComboBox x:Name="TextAlignmentComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="{DynamicResource AlignLeft}"/>
+                <ComboBoxItem Content="{DynamicResource AlignCenter}"/>
+                <ComboBoxItem Content="{DynamicResource AlignRight}"/>
+                <ComboBoxItem Content="{DynamicResource AlignJustified}"/>
+            </ComboBox>
+          </StackPanel>
+          <CheckBox x:Name="AlwaysOnTopCheckBox" Content="{DynamicResource ChkAlwaysOnTop}" IsChecked="{Binding AlwaysOnTop}"/>
+          <CheckBox x:Name="ScreenShareSafeModeCheckBox" Content="{DynamicResource ChkScreenShareSafe}" IsChecked="{Binding ScreenShareSafeModeEnabled}"/>
+          <CheckBox x:Name="HorizontalMirrorCheckBox" Content="{DynamicResource ChkMirrorText}" IsChecked="{Binding HorizontalMirror}"/>
+          <StackPanel Spacing="4">
+            <TextBlock x:Name="TextSizeLabel" Text="Text Size: 32" Opacity="0.85"/>
+            <Slider x:Name="TextSizeSlider" Minimum="2" Maximum="96" Value="32" TickFrequency="2" IsSnapToTickEnabled="True"/>
+          </StackPanel>
+          <StackPanel Spacing="4">
+            <TextBlock x:Name="WindowOpacityLabel" Text="Prompter Opacity: 100%" Opacity="0.85"/>
+            <Slider x:Name="WindowOpacitySlider" Minimum="0.0" Maximum="1.0" Value="1.0" TickFrequency="0.05"/>
+          </StackPanel>
+          <StackPanel Spacing="4">
+            <TextBlock x:Name="ReadingMarginLabel" Text="Reading Margin: 40px" Opacity="0.85"/>
+            <Slider x:Name="ReadingMarginSlider" Minimum="0" Maximum="120" Value="40" TickFrequency="4" IsSnapToTickEnabled="True"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardCleanup}"/>
+          <TextBlock Classes="section-copy" Text="{DynamicResource CleanupInfo}" TextWrapping="Wrap"/>
+          <CheckBox x:Name="CleanupTimestampsCheckBox" Content="{DynamicResource ChkCleanupTimestamps}" IsChecked="True"/>
+          <CheckBox x:Name="CleanupMetadataCheckBox" Content="{DynamicResource ChkCleanupMetadata}" IsChecked="True"/>
+          <CheckBox x:Name="CleanupTablesCheckBox" Content="{DynamicResource ChkCleanupTables}" IsChecked="True"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="PreviewCleanupButton" Content="{DynamicResource BtnPreviewCleanup}" Height="34" Click="PreviewCleanupButton_OnClick"/>
+            <Button x:Name="ApplyCleanupButton" Classes="primary-action" Content="{DynamicResource BtnApplyCleanup}" Height="34" Click="ApplyCleanupButton_OnClick"/>
+            <Button x:Name="RestoreOriginalButton" Content="{DynamicResource BtnRestoreOriginal}" Height="34" Click="RestoreOriginalButton_OnClick"/>
+          </StackPanel>
+          <TextBlock x:Name="CleanupStateLabel" Text="Cleanup: loaded script active" Opacity="0.75"/>
+          <Grid x:Name="CleanupPreviewPanel" IsVisible="False" ColumnDefinitions="*,*" ColumnSpacing="10" RowDefinitions="Auto,*">
+            <TextBlock Grid.Column="0" Text="{DynamicResource LabelOriginalSource}" FontWeight="SemiBold"/>
+            <TextBlock Grid.Column="1" Text="{DynamicResource LabelCleanedPreview}" FontWeight="SemiBold"/>
+            <TextBox x:Name="OriginalPreviewTextBox" Grid.Row="1" Grid.Column="0" Classes="preview-box" IsReadOnly="True" MinHeight="180" TextWrapping="Wrap"/>
+            <TextBox x:Name="CleanedPreviewTextBox" Grid.Row="1" Grid.Column="1" Classes="preview-box" IsReadOnly="True" MinHeight="180" TextWrapping="Wrap"/>
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardWarnings}"/>
+          <TextBlock Text="{Binding SettingsRecoveryMessage}" Foreground="{DynamicResource PromptinoWarningForeground}" TextWrapping="Wrap" IsVisible="{Binding SettingsRecoveryMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+          <TextBlock Text="{Binding SettingsSaveFailureMessage}" Foreground="{DynamicResource PromptinoWarningForeground}" TextWrapping="Wrap" IsVisible="{Binding SettingsSaveFailureMessage, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+          <TextBlock Text="{Binding WindowBehaviorWarning}" Foreground="{DynamicResource PromptinoWarningForeground}" TextWrapping="Wrap" />
+          <TextBlock Text="{Binding ErrorMessage}" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardHotkeys}"/>
+          <TextBlock Classes="section-copy" Text="{DynamicResource LabelPlayPauseHotkey}"/>
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <TextBox x:Name="HotkeyTextBox" PlaceholderText="Ctrl+Alt+Space" Text="Ctrl+Alt+Space" IsReadOnly="True" Height="34"/>
+            <Button x:Name="RecordPlayPauseHotkeyButton" Grid.Column="1" Content="{DynamicResource BtnRecord}" Height="34" Click="RecordPlayPauseHotkeyButton_OnClick"/>
+          </Grid>
+          <TextBlock Classes="section-copy" Text="{DynamicResource LabelNextMarkerHotkey}"/>
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <TextBox x:Name="NextMarkerHotkeyTextBox" PlaceholderText="PageDown" Text="PageDown" IsReadOnly="True" Height="34"/>
+            <Button x:Name="RecordNextMarkerHotkeyButton" Grid.Column="1" Content="{DynamicResource BtnRecord}" Height="34" Click="RecordNextMarkerHotkeyButton_OnClick"/>
+          </Grid>
+          <TextBlock Classes="section-copy" Text="{DynamicResource LabelPrevMarkerHotkey}"/>
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+            <TextBox x:Name="PrevMarkerHotkeyTextBox" PlaceholderText="PageUp" Text="PageUp" IsReadOnly="True" Height="34"/>
+            <Button x:Name="RecordPrevMarkerHotkeyButton" Grid.Column="1" Content="{DynamicResource BtnRecord}" Height="34" Click="RecordPrevMarkerHotkeyButton_OnClick"/>
+          </Grid>
+          <Button x:Name="ApplyHotkeyButton" Content="{DynamicResource BtnApplyHotkeys}" Height="30" Click="ApplyHotkeyButton_OnClick"/>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardExternalEditor}"/>
+          <TextBlock Classes="section-copy" Text="{DynamicResource ExternalEditorInfo}" TextWrapping="Wrap" />
+          <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <TextBox x:Name="ExternalEditorPathTextBox" PlaceholderText="notepad.exe" Height="34"/>
+            <Button x:Name="BrowseExternalEditorButton" Grid.Column="1" Content="{DynamicResource BtnBrowse}" Height="34" Click="BrowseExternalEditorButton_OnClick"/>
+            <Button x:Name="ApplyExternalEditorPathButton" Grid.Column="2" Content="{DynamicResource BtnApply}" Height="34" Click="ApplyExternalEditorPathButton_OnClick"/>
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="section-card">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="section-title" Text="{DynamicResource CardProfiles}"/>
+          <TextBox x:Name="ProfileNameTextBox" PlaceholderText="{DynamicResource PlaceholderProfileName}"/>
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button x:Name="SaveProfileButton" Content="{DynamicResource BtnSaveProfile}" Click="SaveProfileButton_OnClick"/>
+            <Button x:Name="LoadProfileButton" Content="{DynamicResource BtnLoadProfile}" Click="LoadProfileButton_OnClick"/>
+            <Button x:Name="DeleteProfileButton" Content="{DynamicResource BtnDeleteProfile}" Click="DeleteProfileButton_OnClick"/>
+          </StackPanel>
+          <ComboBox x:Name="ProfilesComboBox"/>
+          <TextBlock Text="{Binding ProfilesWarningMessage}" Foreground="{DynamicResource PromptinoWarningForeground}" TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+    </ScrollViewer>
+  </Border>
+</Window>

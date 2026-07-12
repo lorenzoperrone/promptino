@@ -1,0 +1,77 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Promptino.App.App"
+             RequestedThemeVariant="Light">
+    <Application.Styles>
+        <FluentTheme>
+            <FluentTheme.Palettes>
+                <ColorPaletteResources x:Key="Light" Accent="#14B8A6" RegionColor="#F3F4F6" ErrorText="#B26A00" />
+                <ColorPaletteResources x:Key="Dark" Accent="#14B8A6" RegionColor="#111827" ErrorText="#B26A00" />
+            </FluentTheme.Palettes>
+        </FluentTheme>
+        <StyleInclude Source="avares://Promptino.App/Styles.axaml" />
+    </Application.Styles>
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <!-- Promptino brand palette: Light -->
+                    <!--
+                        SAFE to override: SystemControlForegroundAccentBrush, SystemRegionBrush
+                        DANGER: SystemControlBackgroundAltHighBrush causes InvalidCastException
+                        at startup (ImmutableSolidColorBrush vs SolidColorBrush conflict
+                        in Fluent theme). Use custom Promptino* keys instead.
+                    -->
+                    <SolidColorBrush x:Key="SystemControlForegroundAccentBrush">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="SystemRegionBrush">#F3F4F6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWindowBackground">#F3F4F6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoOverlayBackground">#FFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoOverlayBorder">#D1D5DB</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoTintForeground">#374151</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoScriptForeground">#111827</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoPausedPillBackground">#FFE5A0</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoPausedPillForeground">#7D5100</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoReadingGuideBand">#1814B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoReadingGuideLine">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoResizeStroke">#9CA3AF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBrandAccent">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWarningForeground">#B26A00</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPlayingForeground">#F3F4F6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPausedForeground">#FDE68A</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusStoppedForeground">#9CA3AF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPausedIcon">#F59E0B</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBorderFocused">#52C5D4DE</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBorderUnfocused">#26FFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWhiteForeground">#FFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBrandDark">#0F766E</SolidColorBrush>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <!-- Promptino brand palette: Dark -->
+                    <SolidColorBrush x:Key="SystemControlForegroundAccentBrush">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="SystemRegionBrush">#111827</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWindowBackground">#222A34</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoOverlayBackground">#141B22</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoOverlayBorder">#9FB3C8</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoTintForeground">#CDE4EF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoScriptForeground">#F4F8FB</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoPausedPillBackground">#FFE5A0</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoPausedPillForeground">#7D5100</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoReadingGuideBand">#2214B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoReadingGuideLine">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoResizeStroke">#C5D4DE</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBrandAccent">#14B8A6</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWarningForeground">#B26A00</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPlayingForeground">#E5E7EB</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPausedForeground">#FDE68A</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusStoppedForeground">#9CA3AF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoStatusPausedIcon">#F59E0B</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBorderFocused">#52C5D4DE</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBorderUnfocused">#26FFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoWhiteForeground">#FFFFFF</SolidColorBrush>
+                    <SolidColorBrush x:Key="PromptinoBrandDark">#0F766E</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

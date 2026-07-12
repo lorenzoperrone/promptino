@@ -1,0 +1,183 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Promptino.App.RemoteMiniWindow"
+        Width="300"
+        Height="235"
+        MinWidth="280"
+        MinHeight="220"
+        Topmost="True"
+        WindowStartupLocation="Manual"
+        CanResize="True"
+        Title="{DynamicResource RemoteTitle}"
+        Icon="/Assets/promptino-icon.ico">
+  <Border Padding="0">
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+          Background="{DynamicResource SystemRegionBrush}">
+      <!-- Accent top bar -->
+      <Border Height="3" Background="{DynamicResource PromptinoBrandAccent}" />
+
+      <!-- Row 1: Status header -->
+      <Border Grid.Row="1" Padding="14,10,14,4">
+        <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+          <TextBlock x:Name="RemoteStatusIcon"
+                     Text="&#x25B6;"
+                     Foreground="{DynamicResource PromptinoBrandAccent}"
+                     FontSize="14"
+                     VerticalAlignment="Center"
+                     Margin="0,0,6,0"/>
+          <TextBlock x:Name="RemoteStatusLabel"
+                     Grid.Column="1"
+                     Text="{DynamicResource RemoteStatusReady}"
+                     Opacity="0.75"
+                     FontSize="13"
+                     VerticalAlignment="Center"
+                     Margin="0,0,0,0"/>
+          <TextBlock x:Name="RemoteSpeedLabel"
+                     Grid.Column="3"
+                     Text="130 WPM"
+                     Opacity="0.85"
+                     FontSize="13"
+                     VerticalAlignment="Center"/>
+        </Grid>
+      </Border>
+
+      <!-- Row 2: Progress bar -->
+      <Border Grid.Row="2" Padding="14,2,14,6">
+        <Grid ColumnDefinitions="*, Auto">
+          <Grid Grid.Column="0" VerticalAlignment="Center">
+            <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}" CornerRadius="4" Height="6" />
+            <Border x:Name="RemoteProgressFill"
+                    Background="{DynamicResource PromptinoBrandAccent}"
+                    CornerRadius="4"
+                    Height="6"
+                    HorizontalAlignment="Stretch"/>
+          </Grid>
+          <TextBlock Grid.Column="1" x:Name="RemoteProgressLabel"
+                     Text="0%"
+                     Opacity="0.75"
+                     FontSize="10"
+                     VerticalAlignment="Center"
+                     Margin="8,0,0,0"
+                     Width="30"
+                     TextAlignment="Right"/>
+        </Grid>
+      </Border>
+
+      <!-- Row 3: Playback controls -->
+      <Border Grid.Row="3" Padding="14,4,14,4">
+        <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+          <Button x:Name="RemotePlayButton"
+                  Classes="primary-action"
+                  Content="{DynamicResource BtnRemotePlay}"
+                  Width="80"
+                  Height="30"
+                  FontSize="12"
+                  CornerRadius="6"
+                  Click="Play_OnClick"
+                  ToolTip.Tip="{DynamicResource TooltipPlay}"/>
+          <Button x:Name="RemotePauseButton"
+                  Content="{DynamicResource BtnRemotePause}"
+                  Width="80"
+                  Height="30"
+                  FontSize="12"
+                  CornerRadius="6"
+                  Click="Pause_OnClick"
+                  BorderThickness="1"
+                  BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                  Background="Transparent"
+                  Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                  ToolTip.Tip="{DynamicResource TooltipPause}"/>
+          <Button x:Name="RemoteResetButton"
+                  Content="{DynamicResource BtnRemoteReset}"
+                  Width="80"
+                  Height="30"
+                  FontSize="12"
+                  CornerRadius="6"
+                  Click="Reset_OnClick"
+                  BorderThickness="1"
+                  BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                  Background="Transparent"
+                  Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                  ToolTip.Tip="{DynamicResource TooltipReset}"/>
+        </StackPanel>
+      </Border>
+
+      <!-- Row 4: Speed controls -->
+      <Border Grid.Row="4" Padding="14,4,14,4">
+        <Grid ColumnDefinitions="*,*">
+          <TextBlock Text="{DynamicResource RemoteWpmLabel}"
+                     Opacity="0.75"
+                     FontSize="12"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Left"
+                     Margin="4,0,0,0"/>
+          <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6" HorizontalAlignment="Right">
+            <Button Content="−5"
+                    Width="40"
+                    Height="28"
+                    FontSize="11"
+                    Padding="0"
+                    CornerRadius="6"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                    Background="Transparent"
+                    Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                    Click="Down_OnClick"
+                    HorizontalContentAlignment="Center"/>
+            <Button Content="+5"
+                    Width="40"
+                    Height="28"
+                    FontSize="11"
+                    Padding="0"
+                    CornerRadius="6"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                    Background="Transparent"
+                    Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                    Click="Up_OnClick"
+                    HorizontalContentAlignment="Center"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <!-- Row 5: Marker controls -->
+      <Border Grid.Row="5" Padding="14,4,14,10">
+        <Grid ColumnDefinitions="*,*">
+          <Button x:Name="RemotePrevButton"
+                  Grid.Column="0"
+                  Content="{DynamicResource BtnRemotePrev}"
+                  Height="28"
+                  FontSize="9"
+                  Padding="0"
+                  CornerRadius="6"
+                  BorderThickness="1"
+                  BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                  Background="Transparent"
+                  Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                  Click="PrevMarker_OnClick"
+                  ToolTip.Tip="{DynamicResource TooltipPrevMarker}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  Margin="0,0,3,0"/>
+          <Button x:Name="RemoteNextButton"
+                  Grid.Column="1"
+                  Content="{DynamicResource BtnRemoteNext}"
+                  Height="28"
+                  FontSize="9"
+                  Padding="0"
+                  CornerRadius="6"
+                  BorderThickness="1"
+                  BorderBrush="{DynamicResource SystemControlDisabledBaseLowBrush}"
+                  Background="Transparent"
+                  Foreground="{DynamicResource SystemControlForegroundBaseHighBrush}"
+                  Click="NextMarker_OnClick"
+                  ToolTip.Tip="{DynamicResource TooltipNextMarker}"
+                  HorizontalAlignment="Stretch"
+                  HorizontalContentAlignment="Center"
+                  Margin="3,0,0,0"/>
+        </Grid>
+      </Border>
+
+    </Grid>
+  </Border>
+</Window>

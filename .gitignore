@@ -1,0 +1,30 @@
+# Build artifacts
+bin/
+obj/
+
+# Packaged binaries and installer (not needed in source)
+binaries/
+installer/
+
+# User-specific files
+*.user
+*.suo
+.vs/
+
+# Rider / JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NuGet packages
+packages/
+*.nupkg
+*.snupkg
+
+# Logs
+*.log
