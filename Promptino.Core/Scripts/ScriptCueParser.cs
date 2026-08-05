@@ -4,15 +4,31 @@ using System.Text.RegularExpressions;
 
 namespace Promptino.Core.Scripts;
 
+/// <summary>
+/// Specifies the classification of a script text cue segment.
+/// </summary>
 public enum CueTokenType
 {
+    /// <summary>Standard spoken script text.</summary>
     Text,
+
+    /// <summary>Stage direction or parenthetical instruction (e.g. (laughs), [PAUSE]).</summary>
     StageDirection,
+
+    /// <summary>Speaker label prefix (e.g. ALICE: or [SPEAKER 1]:).</summary>
     Speaker
 }
 
+/// <summary>
+/// Represents a parsed token within a script line.
+/// </summary>
+/// <param name="Text">The string content of the token.</param>
+/// <param name="Type">The cue token type classification.</param>
 public sealed record ScriptCueToken(string Text, CueTokenType Type);
 
+/// <summary>
+/// Parses script lines to extract speaker prefixes and stage direction tokens for UI styling.
+/// </summary>
 public sealed partial class ScriptCueParser
 {
     [GeneratedRegex(@"^(\[[A-Z0-9_\s]{2,20}\]:?|[A-Z0-9_\s]{2,15}:)\s*", RegexOptions.IgnoreCase)]
@@ -21,6 +37,11 @@ public sealed partial class ScriptCueParser
     [GeneratedRegex(@"(\((?:[^()]+|\([^()]*\))*\)|\[(?!\[marker)[^\]]+\])")]
     private static partial Regex StageDirectionRegex();
 
+    /// <summary>
+    /// Parses a line of script text into a sequence of classified cue tokens (<see cref="ScriptCueToken"/>).
+    /// </summary>
+    /// <param name="line">The script line to parse.</param>
+    /// <returns>A read-only list of parsed cue tokens.</returns>
     public static IReadOnlyList<ScriptCueToken> ParseTokens(string line)
     {
         var tokens = new List<ScriptCueToken>();
