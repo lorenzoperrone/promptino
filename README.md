@@ -5,6 +5,11 @@ Promptino is a lightweight, clean, and customizable overlay teleprompter designe
 ## Key Features
 
 - **Floating Overlay**: Stays on top of active windows with adjustable opacity, size, and reading margins.
+- **Stage Directions & Speaker Highlighting**: Automatic formatting for cues `(pausa 3s)`, `[applausi]`, and speaker labels `[HOST]:` with distinct badge styling.
+- **Mouse Click-Through Mode**: Toggle interactive transparency (`WS_EX_TRANSPARENT`) to click directly through the prompter to underlying Zoom, Teams, or OBS controls.
+- **Multi-Monitor & Borderless Fullscreen**: Select target display for the prompter overlay with borderless fullscreen support.
+- **Presentation Timer**: Onscreen speech duration counter and countdown timer with color alerts (amber/red) when nearing your time target.
+- **Subtitle & Marker Jump**: Load `.srt` and `.vtt` subtitles or custom `[[marker:Label]]` tags with instant marker navigation and ANSI/Windows-1252 auto-detection.
 - **Reading Guide**: Highlighting line and background bands to help keep your place.
 - **Dynamic Speed Calibration**: Set speed in Words Per Minute (WPM) with easy speed adjustments during playback.
 - **Remote Controller**: A compact remote window that lets you start, pause, reset, or skip between script markers.
