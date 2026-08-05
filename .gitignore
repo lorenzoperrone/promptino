@@ -18,8 +18,10 @@ Thumbs.db
 .claude/
 .claude/settings.local.json
 
-# Release artifacts
+# Release artifacts & output builds
 release/
+binaries/
+installer/
 
 # Gemini Agent
 .gemini/
