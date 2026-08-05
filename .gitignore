@@ -1,0 +1,28 @@
+# Build artifacts
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+.vs/
+
+# Rider / JetBrains
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/
+.claude/settings.local.json
+
+# Release artifacts
+release/
+
+# Gemini Agent
+.gemini/
+
+# Inno Setup installer script (local build only)
+Promptino.iss

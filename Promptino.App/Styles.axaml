@@ -1,0 +1,41 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="Window">
+        <Setter Property="Background" Value="{DynamicResource PromptinoWindowBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource PromptinoTintForeground}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+    </Style>
+    <Style Selector="Border.section-card">
+        <Setter Property="Background" Value="{DynamicResource PromptinoOverlayBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource PromptinoOverlayBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="12"/>
+        <Setter Property="Padding" Value="14"/>
+    </Style>
+    <Style Selector="TextBlock.section-title">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource PromptinoBrandAccent}"/>
+    </Style>
+    <Style Selector="TextBlock.section-copy">
+        <Setter Property="Opacity" Value="0.75"/>
+    </Style>
+    <Style Selector="Button">
+        <Setter Property="Padding" Value="12,6"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="Button.primary-action /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PromptinoBrandAccent}"/>
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource PromptinoWhiteForeground}"/>
+    </Style>
+    <Style Selector="Button.primary-action:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PromptinoBrandDark}"/>
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource PromptinoWhiteForeground}"/>
+    </Style>
+    <Style Selector="TextBox.preview-box">
+        <Setter Property="FontFamily" Value="Cascadia Code, Consolas, monospace"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+    </Style>
+</Styles>

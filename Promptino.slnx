@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Promptino.App.Tests/Promptino.App.Tests.csproj" />
+  <Project Path="Promptino.App/Promptino.App.csproj" />
+  <Project Path="Promptino.Core/Promptino.Core.csproj" />
+  <Project Path="Promptino.Platform/Promptino.Platform.csproj" />
+  <Project Path="Promptino.Storage/Promptino.Storage.csproj" />
+</Solution>
