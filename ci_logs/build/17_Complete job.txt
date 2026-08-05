@@ -1,9 +1,0 @@
-﻿2026-08-05T22:28:14.0620635Z Cleaning up orphan processes
-2026-08-05T22:28:14.1325037Z Terminate orphan process: pid (7232) (dotnet)
-2026-08-05T22:28:14.1481746Z Terminate orphan process: pid (7148) (dotnet)
-2026-08-05T22:28:14.1597646Z Terminate orphan process: pid (7368) (dotnet)
-2026-08-05T22:28:14.1706698Z Terminate orphan process: pid (1828) (conhost)
-2026-08-05T22:28:14.1916709Z Terminate orphan process: pid (7164) (VBCSCompiler)
-2026-08-05T22:28:14.2002553Z Terminate orphan process: pid (9156) (conhost)
-2026-08-05T22:28:14.2252306Z Terminate orphan process: pid (1252) (dotnet)
-2026-08-05T22:28:14.2303591Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-dotnet@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
