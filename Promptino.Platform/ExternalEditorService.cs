@@ -4,13 +4,26 @@ using System.IO;
 
 namespace Promptino.Platform;
 
+/// <summary>
+/// Abstraction for launching external OS processes.
+/// </summary>
 public interface IProcessLauncher
 {
+    /// <summary>
+    /// Launches an external application process.
+    /// </summary>
+    /// <param name="fileName">The target executable file path or command name.</param>
+    /// <param name="arguments">Command line arguments to pass to the executable.</param>
+    /// <param name="workingDirectory">Optional working directory path.</param>
     void Launch(string fileName, IEnumerable<string> arguments, string? workingDirectory = null);
 }
 
+/// <summary>
+/// System process launcher using <see cref="Process.Start(ProcessStartInfo)"/> and PATH resolution.
+/// </summary>
 public sealed class SystemProcessLauncher : IProcessLauncher
 {
+    /// <inheritdoc />
     public void Launch(string fileName, IEnumerable<string> arguments, string? workingDirectory = null)
     {
         var resolvedPath = ResolveExecutablePath(fileName, workingDirectory);
@@ -123,22 +136,41 @@ public sealed class SystemProcessLauncher : IProcessLauncher
     }
 }
 
+/// <summary>
+/// Service interface for opening active teleprompter scripts in an external text editor.
+/// </summary>
 public interface IExternalEditorService
 {
+    /// <summary>
+    /// Attempts to open the script file at <paramref name="scriptPath"/> in the configured external editor.
+    /// </summary>
+    /// <param name="scriptPath">The file path of the active script.</param>
+    /// <param name="configuredEditorPath">The user-configured editor command line or executable path.</param>
+    /// <param name="warningMessage">Out parameter populated with user-facing warnings on failure.</param>
+    /// <returns><c>true</c> if successfully launched; otherwise, <c>false</c>.</returns>
     bool TryOpenScript(string? scriptPath, string? configuredEditorPath, out string warningMessage);
 }
 
+/// <summary>
+/// Provides script launcher logic for external text editors (e.g. Notepad, VS Code, Typora).
+/// </summary>
 public sealed class ExternalEditorService : IExternalEditorService
 {
+    /// <summary>Default fallback editor executable name on Windows.</summary>
     public const string DefaultEditorFileName = "notepad.exe";
 
     private readonly IProcessLauncher _launcher;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ExternalEditorService"/>.
+    /// </summary>
+    /// <param name="launcher">Optional process launcher dependency.</param>
     public ExternalEditorService(IProcessLauncher? launcher = null)
     {
         _launcher = launcher ?? new SystemProcessLauncher();
     }
 
+    /// <inheritdoc />
     public bool TryOpenScript(string? scriptPath, string? configuredEditorPath, out string warningMessage)
     {
         if (string.IsNullOrWhiteSpace(scriptPath))

@@ -3,17 +3,30 @@ using System.Runtime.InteropServices;
 
 namespace Promptino.Platform;
 
+/// <summary>
+/// Service interface to toggle mouse click-through behavior for native OS window handles.
+/// </summary>
 public interface IWindowClickThroughService
 {
+    /// <summary>
+    /// Enables or disables click-through on the specified window.
+    /// </summary>
+    /// <param name="windowHandle">Native OS window handle (HWND).</param>
+    /// <param name="enableClickThrough"><c>true</c> to pass mouse inputs through to windows below; <c>false</c> to capture mouse inputs.</param>
+    /// <returns><c>true</c> if the window style was updated successfully.</returns>
     bool SetClickThrough(IntPtr windowHandle, bool enableClickThrough);
 }
 
+/// <summary>
+/// Windows platform implementation of <see cref="IWindowClickThroughService"/> modifying WS_EX_TRANSPARENT window styles.
+/// </summary>
 public sealed class WindowClickThroughService : IWindowClickThroughService
 {
     private const int GWL_EXSTYLE = -20;
     private const int WS_EX_TRANSPARENT = 0x00000020;
     private const int WS_EX_LAYERED = 0x00080000;
 
+    /// <inheritdoc />
     public bool SetClickThrough(IntPtr windowHandle, bool enableClickThrough)
     {
         if (!OperatingSystem.IsWindows() || windowHandle == IntPtr.Zero)
@@ -66,7 +79,11 @@ public sealed class WindowClickThroughService : IWindowClickThroughService
     private static extern IntPtr SetWindowLongPtr64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 }
 
+/// <summary>
+/// Fallback no-op implementation of <see cref="IWindowClickThroughService"/> for non-supported platforms.
+/// </summary>
 public sealed class NoOpWindowClickThroughService : IWindowClickThroughService
 {
+    /// <inheritdoc />
     public bool SetClickThrough(IntPtr windowHandle, bool enableClickThrough) => false;
 }

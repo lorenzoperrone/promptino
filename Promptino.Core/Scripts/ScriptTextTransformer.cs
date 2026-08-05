@@ -3,8 +3,19 @@ using System.Text.RegularExpressions;
 
 namespace Promptino.Core.Scripts;
 
+/// <summary>
+/// Cleans and formats raw script text (Markdown, plain text, subtitles) into prompter-optimized text.
+/// </summary>
 public sealed partial class ScriptTextTransformer
 {
+    /// <summary>
+    /// Configuration options specifying which cleanup transforms to apply to script text.
+    /// </summary>
+    /// <param name="RemoveTimestamps">Strips subtitle timestamps and line index numbers.</param>
+    /// <param name="RemoveMetadataRows">Strips front-matter and key-value metadata rows.</param>
+    /// <param name="RemoveMarkdownTables">Flattens or removes Markdown tables.</param>
+    /// <param name="ApplyMarkdownCleanup">Strips Markdown formatting tags (bold, italic, code blocks) into plain spoken text.</param>
+    /// <param name="CollapseBlankLines">Collapses multiple consecutive blank lines into a double newline.</param>
     public sealed record ScriptCleanupOptions(
         bool RemoveTimestamps = true,
         bool RemoveMetadataRows = true,
@@ -59,9 +70,22 @@ public sealed partial class ScriptTextTransformer
     [GeneratedRegex(@"^\|.*\|$")]
     private static partial Regex MarkdownTableRowRegex();
 
+    /// <summary>
+    /// Transforms raw content using default <see cref="ScriptCleanupOptions"/>.
+    /// </summary>
+    /// <param name="rawContent">Raw script text.</param>
+    /// <param name="extension">File extension (e.g. ".md", ".txt", ".srt").</param>
+    /// <returns>Cleaned script text ready for display.</returns>
     public string Transform(string rawContent, string extension)
         => Transform(rawContent, extension, new ScriptCleanupOptions());
 
+    /// <summary>
+    /// Transforms raw script text into readable teleprompter text according to the specified <see cref="ScriptCleanupOptions"/>.
+    /// </summary>
+    /// <param name="rawContent">Raw script content.</param>
+    /// <param name="extension">File extension used to detect format rules (e.g. ".md").</param>
+    /// <param name="options">Cleanup and transformation options.</param>
+    /// <returns>Processed script content.</returns>
     public string Transform(string rawContent, string extension, ScriptCleanupOptions options)
     {
         if (string.IsNullOrEmpty(rawContent)) return string.Empty;

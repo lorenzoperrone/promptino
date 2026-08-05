@@ -7,22 +7,40 @@ using System.Text;
 
 namespace Promptino.Platform;
 
+/// <summary>
+/// Provides logging capabilities across the application.
+/// </summary>
 public interface ILogger
 {
+    /// <summary>Logs an informational message.</summary>
     void LogInfo(string message);
+
+    /// <summary>Logs a warning message.</summary>
     void LogWarning(string message);
+
+    /// <summary>Logs an error message with an optional exception payload.</summary>
     void LogError(string message, Exception? exception = null);
 }
 
+/// <summary>
+/// Thread-safe file logger supporting automatic size-based log rotation and privacy path sanitization.
+/// </summary>
 public sealed class FileLogger : ILogger
 {
     private readonly string _logFilePath;
     private readonly object _lock = new();
     private static readonly (string Path, string Placeholder)[]? _sensitivePaths;
 
+    /// <summary>Gets or sets the maximum log file size in bytes before triggering log rotation (default 1 MB).</summary>
     public long MaxLogFileSize { get; set; } = 1 * 1024 * 1024; // Default: 1 MB
+
+    /// <summary>Gets or sets the maximum number of rotated backup log files to retain (default 5).</summary>
     public int MaxBackupFiles { get; set; } = 5; // Default: 5 backups
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="FileLogger"/>.
+    /// </summary>
+    /// <param name="pathProvider">Optional path provider; uses <see cref="WindowsAppDataPathProvider"/> if null.</param>
     public FileLogger(IAppDataPathProvider? pathProvider = null)
     {
         var provider = pathProvider ?? new WindowsAppDataPathProvider();
@@ -50,8 +68,13 @@ public sealed class FileLogger : ILogger
         }
     }
 
+    /// <inheritdoc />
     public void LogInfo(string message) => Log("INFO", message);
+
+    /// <inheritdoc />
     public void LogWarning(string message) => Log("WARNING", message);
+
+    /// <inheritdoc />
     public void LogError(string message, Exception? exception = null)
     {
         var fullMessage = exception != null ? $"{message} - Exception: {exception.Message}\nStack: {exception.StackTrace}" : message;

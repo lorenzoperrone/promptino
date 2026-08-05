@@ -4,12 +4,27 @@ using System.Threading;
 
 namespace Promptino.Platform;
 
+/// <summary>
+/// Monitors file system changes for a active script file and notifies subscribers.
+/// </summary>
 public interface IScriptWatcher : IDisposable
 {
+    /// <summary>
+    /// Starts watching the specified script file for external modifications.
+    /// </summary>
+    /// <param name="filePath">The target file path to watch.</param>
+    /// <param name="onChanged">Callback invoked when the file is modified on disk.</param>
     void StartWatching(string filePath, Action onChanged);
+
+    /// <summary>
+    /// Stops watching the current file and releases resources.
+    /// </summary>
     void StopWatching();
 }
 
+/// <summary>
+/// Implementation of <see cref="IScriptWatcher"/> with 500ms debouncing using <see cref="FileSystemWatcher"/>.
+/// </summary>
 public sealed class ScriptWatcher : IScriptWatcher
 {
     private FileSystemWatcher? _watcher;
@@ -19,6 +34,7 @@ public sealed class ScriptWatcher : IScriptWatcher
     private bool _stopped;
     private readonly object _lock = new();
 
+    /// <inheritdoc />
     public void StartWatching(string filePath, Action onChanged)
     {
         StopWatching();
@@ -96,8 +112,8 @@ public sealed class ScriptWatcher : IScriptWatcher
 
     private void OnWatcherError(object sender, ErrorEventArgs e)
     {
-        // Se il buffer di sistema va in overflow, non spegniamo il watcher.
-        // Forziamo un ricaricamento del file (se il file esiste ancora, il Loader lo leggerà).
+        // If the system buffer overflows, do not disable the watcher.
+        // Force a file reload debounced trigger (if the file still exists, the Loader will read it).
         lock (_lock)
         {
             if (_stopped) return;

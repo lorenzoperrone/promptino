@@ -5,11 +5,21 @@ using System.Text.RegularExpressions;
 
 namespace Promptino.Core.Scripts;
 
+/// <summary>
+/// Parses embedded marker tags (<c>[[marker:Label]]</c>) and subtitle timestamps to create <see cref="ScriptMarker"/> instances.
+/// </summary>
 public sealed partial class ScriptMarkerParser
 {
     [GeneratedRegex(@"\[\[marker:?([^\]]*)\]\]", RegexOptions.IgnoreCase)]
     private static partial Regex MarkerRegex();
 
+    /// <summary>
+    /// Extracts embedded marker tags from script text, computes progress ratios based on word positions,
+    /// and returns the cleaned text stripped of all marker tags.
+    /// </summary>
+    /// <param name="text">The raw script text containing marker tags.</param>
+    /// <param name="markers">Out parameter populated with the parsed <see cref="ScriptMarker"/> instances.</param>
+    /// <returns>Script text with marker tags removed.</returns>
     public static string ParseAndRemoveMarkers(string text, out IReadOnlyList<ScriptMarker> markers)
     {
         var markerList = new List<ScriptMarker>();
@@ -62,6 +72,11 @@ public sealed partial class ScriptMarkerParser
     [GeneratedRegex(@"^((?:\d{1,2}:)?\d{2}:\d{2}(?:[.,]\d{1,3})?)\s*--?>\s*(?:\d{1,2}:)?\d{2}:\d{2}(?:[.,]\d{1,3})?$", RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex SubtitleTimestampRegex();
 
+    /// <summary>
+    /// Parses subtitle timestamp blocks (e.g. SRT timestamps) from raw script content to generate navigation markers.
+    /// </summary>
+    /// <param name="rawContent">The raw subtitle text containing timestamps.</param>
+    /// <returns>A read-only list of parsed subtitle <see cref="ScriptMarker"/> instances.</returns>
     public static IReadOnlyList<ScriptMarker> ParseSubtitleMarkers(string rawContent)
     {
         var markers = new List<ScriptMarker>();
