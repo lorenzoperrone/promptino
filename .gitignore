@@ -26,3 +26,7 @@ release/
 
 # Inno Setup installer script (local build only)
 Promptino.iss
+
+# BMAD planning & implementation artifacts
+_bmad/
+_bmad-output/
