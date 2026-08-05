@@ -21,16 +21,16 @@ jobs:
           include-prerelease: true
 
       - name: Restore dependencies
-        run: dotnet restore Promptino.slnx
+        run: dotnet restore Promptino.slnx -r win-x64
 
       - name: Build
-        run: dotnet build Promptino.slnx -c Release --no-restore
+        run: dotnet build Promptino.slnx -c Release
 
       - name: Run tests
         run: dotnet test Promptino.App.Tests/Promptino.App.Tests.csproj -c Release
 
       - name: Publish (self-contained win-x64)
-        run: dotnet publish Promptino.App/Promptino.App.csproj -c Release --no-restore -p:PublishProfile=win-x64-release
+        run: dotnet publish Promptino.App/Promptino.App.csproj -c Release -p:PublishProfile=win-x64-release
 
       - name: Upload publish artifacts
         uses: actions/upload-artifact@v4
