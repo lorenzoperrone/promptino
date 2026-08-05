@@ -3,52 +3,99 @@ using System.Runtime.Versioning;
 
 namespace Promptino.Platform;
 
+/// <summary>
+/// Bitwise flags representing modifier keys (Alt, Control, Shift, Win) for global hotkey registration.
+/// </summary>
 [Flags]
 public enum HotkeyModifiers
 {
+    /// <summary>No modifier key.</summary>
     None = 0,
+    /// <summary>Alt key.</summary>
     Alt = 1,
+    /// <summary>Control key.</summary>
     Control = 2,
+    /// <summary>Shift key.</summary>
     Shift = 4,
+    /// <summary>Windows logo key.</summary>
     Win = 8,
 }
 
+/// <summary>
+/// Represents a global hotkey shortcut combination of modifier flags and virtual key code.
+/// </summary>
+/// <param name="Modifiers">Modifier keys combination.</param>
+/// <param name="VirtualKey">Windows virtual key code (e.g. 0x20 for Space).</param>
 public readonly record struct GlobalHotkey(HotkeyModifiers Modifiers, int VirtualKey)
 {
+    /// <summary>Gets default hotkey (Control + Alt + Space).</summary>
     public static GlobalHotkey Default => new(HotkeyModifiers.Control | HotkeyModifiers.Alt, 0x20); // Space
 
+    /// <summary>Gets a value indicating whether the hotkey combination is valid.</summary>
     public bool IsValid => Modifiers != HotkeyModifiers.None && VirtualKey is >= 0x08 and <= 0xFE;
 }
 
+/// <summary>
+/// Result snapshot returned when registering or updating global hotkeys.
+/// </summary>
+/// <param name="Success"><c>true</c> if all hotkeys were registered successfully.</param>
+/// <param name="IsConflict"><c>true</c> if registration failed due to shortcut conflict with another running app.</param>
+/// <param name="Warning">User-facing error or warning message.</param>
 public readonly record struct HotkeyRegistrationResult(bool Success, bool IsConflict, string? Warning)
 {
+    /// <summary>Creates a successful registration result.</summary>
     public static HotkeyRegistrationResult Ok() => new(true, false, null);
+
+    /// <summary>Creates a conflict error result when a hotkey is already in use.</summary>
     public static HotkeyRegistrationResult Conflict() => new(false, true, "Global hotkey unavailable: shortcut already in use by another app. Choose a different shortcut.");
+
+    /// <summary>Creates a failure result with the given warning message.</summary>
     public static HotkeyRegistrationResult Failure(string warning) => new(false, false, warning);
 }
 
+/// <summary>
+/// Provides system-wide global hotkey registration and event dispatching.
+/// </summary>
 public interface IGlobalHotkeyService : IDisposable
 {
+    /// <summary>Occurs when a registered global hotkey is pressed.</summary>
     event Action<int>? HotkeyPressed;
+
+    /// <summary>Updates and registers active global hotkeys with OS bindings.</summary>
+    /// <param name="hotkeys">Collection of hotkey bindings keyed by integer ID.</param>
+    /// <returns>A <see cref="HotkeyRegistrationResult"/> indicating status.</returns>
     HotkeyRegistrationResult UpdateHotkeys(IEnumerable<(int Id, GlobalHotkey Hotkey)> hotkeys);
+
+    /// <summary>Stops global hotkey listening worker thread and unregisters hotkeys.</summary>
     void Stop();
 }
 
+/// <summary>
+/// Fallback no-op hotkey service implementation for non-Windows platforms.
+/// </summary>
 public sealed class NoOpGlobalHotkeyService : IGlobalHotkeyService
 {
+    /// <inheritdoc />
     public event Action<int>? HotkeyPressed
     {
         add { }
         remove { }
     }
 
+    /// <inheritdoc />
     public HotkeyRegistrationResult UpdateHotkeys(IEnumerable<(int Id, GlobalHotkey Hotkey)> hotkeys)
         => HotkeyRegistrationResult.Failure("Global hotkeys are available only on Windows.");
 
+    /// <inheritdoc />
     public void Stop() { }
+
+    /// <inheritdoc />
     public void Dispose() { }
 }
 
+/// <summary>
+/// Windows implementation of <see cref="IGlobalHotkeyService"/> using Win32 <c>RegisterHotKey</c> and STA message loop.
+/// </summary>
 [SupportedOSPlatform("windows")]
 public sealed class WindowsGlobalHotkeyService : IGlobalHotkeyService
 {
@@ -66,8 +113,10 @@ public sealed class WindowsGlobalHotkeyService : IGlobalHotkeyService
 
     private readonly object _updateLock = new();
 
+    /// <inheritdoc />
     public event Action<int>? HotkeyPressed;
 
+    /// <inheritdoc />
     public HotkeyRegistrationResult UpdateHotkeys(IEnumerable<(int Id, GlobalHotkey Hotkey)> hotkeys)
     {
         if (!OperatingSystem.IsWindows()) return HotkeyRegistrationResult.Failure("Global hotkeys are available only on Windows.");
@@ -97,6 +146,7 @@ public sealed class WindowsGlobalHotkeyService : IGlobalHotkeyService
         }
     }
 
+    /// <inheritdoc />
     public void Stop()
     {
         lock (_sync)
