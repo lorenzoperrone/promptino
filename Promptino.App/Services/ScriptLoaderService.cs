@@ -7,11 +7,20 @@ using Promptino.Core.Scripts;
 
 namespace Promptino.App.Services;
 
+/// <summary>
+/// Abstraction for reading script file content from disk.
+/// </summary>
 public interface IScriptFileReader
 {
+    /// <summary>
+    /// Reads text from the specified file path asynchronously.
+    /// </summary>
     Task<string> ReadAllTextAsync(string path, CancellationToken cancellationToken);
 }
 
+/// <summary>
+/// File reader with automatic character encoding detection (UTF-8, UTF-16, Windows-1252, ISO-8859-1).
+/// </summary>
 public sealed class LocalScriptFileReader : IScriptFileReader
 {
     static LocalScriptFileReader()
@@ -19,12 +28,16 @@ public sealed class LocalScriptFileReader : IScriptFileReader
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
     }
 
+    /// <inheritdoc />
     public async Task<string> ReadAllTextAsync(string path, CancellationToken cancellationToken)
     {
         var bytes = await Promptino.Storage.IoRetry.RunAsync(async ct => await File.ReadAllBytesAsync(path, ct), cancellationToken);
         return DetectAndReadText(bytes);
     }
 
+    /// <summary>
+    /// Detects text encoding from BOM or fallback heuristics and converts raw bytes into a string.
+    /// </summary>
     public static string DetectAndReadText(byte[] bytes)
     {
         if (bytes == null || bytes.Length == 0) return string.Empty;
@@ -58,6 +71,9 @@ public sealed class LocalScriptFileReader : IScriptFileReader
     }
 }
 
+/// <summary>
+/// High-level service that loads, decodes, cleans, and extracts markers from script files (.txt, .md, .srt, .vtt).
+/// </summary>
 public sealed class ScriptLoaderService
 {
     private static readonly string[] SupportedExtensions = [".txt", ".md", ".srt", ".vtt"];
@@ -65,12 +81,18 @@ public sealed class ScriptLoaderService
     private readonly IScriptFileReader _fileReader;
     private readonly ScriptTextTransformer _transformer;
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ScriptLoaderService"/>.
+    /// </summary>
     public ScriptLoaderService(IScriptFileReader fileReader, ScriptTextTransformer transformer)
     {
         _fileReader = fileReader;
         _transformer = transformer;
     }
 
+    /// <summary>
+    /// Loads and processes the script file at the specified path asynchronously.
+    /// </summary>
     public async Task<ScriptLoadResult> LoadAsync(string path, CancellationToken cancellationToken = default)
     {
         try

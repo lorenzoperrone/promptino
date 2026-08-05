@@ -2,6 +2,9 @@ using System.Text.Json;
 
 namespace Promptino.Storage.Settings;
 
+/// <summary>
+/// Represents a saved user configuration profile containing reading speed, styling, and window positioning.
+/// </summary>
 public sealed record SavedProfile(
     string Name,
     int Wpm,
@@ -15,16 +18,25 @@ public sealed record SavedProfile(
     int WindowHeight,
     int SchemaVersion = 1);
 
+/// <summary>
+/// Manages JSON persistence and loading for user profile collections.
+/// </summary>
 public sealed class ProfileStore : IDisposable
 {
     private readonly string _path;
     private readonly SemaphoreSlim _saveLock = new(1, 1);
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="ProfileStore"/> with the target file path.
+    /// </summary>
     public ProfileStore(string path)
     {
         _path = path;
     }
 
+    /// <summary>
+    /// Loads user profiles from JSON storage asynchronously.
+    /// </summary>
     public async Task<(IReadOnlyList<SavedProfile> Profiles, bool Recovered)> LoadAsync(CancellationToken ct = default)
     {
         if (!File.Exists(_path)) return ([], false);
@@ -52,6 +64,7 @@ public sealed class ProfileStore : IDisposable
         }
     }
 
+    /// <summary>Creates a default onboarding profile.</summary>
     public static SavedProfile CreateDefault() => new(
         "Default",
         Wpm: 130,
@@ -61,12 +74,14 @@ public sealed class ProfileStore : IDisposable
         HotkeyGesture: "Ctrl+Alt+Space",
         WindowX: 100, WindowY: 100, WindowWidth: 900, WindowHeight: 560);
 
+    /// <summary>Ensures at least one profile exists, creating default if collection is empty.</summary>
     public async Task<bool> EnsureDefaultProfileAsync(IReadOnlyList<SavedProfile> currentProfiles, CancellationToken ct = default)
     {
         if (currentProfiles.Count > 0) return false;
         return await SaveAllAsync([CreateDefault()], ct);
     }
 
+    /// <summary>Saves all user profiles to JSON storage atomically.</summary>
     public async Task<bool> SaveAllAsync(IReadOnlyList<SavedProfile> profiles, CancellationToken ct = default)
     {
         var tempPath = _path + ".tmp";
@@ -91,5 +106,6 @@ public sealed class ProfileStore : IDisposable
         finally { _saveLock.Release(); }
     }
 
+    /// <inheritdoc />
     public void Dispose() => _saveLock.Dispose();
 }

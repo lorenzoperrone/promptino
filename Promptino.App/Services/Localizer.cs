@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace Promptino.App.Services;
 
+/// <summary>
+/// Provides runtime localization string resolution with fallback dictionary support.
+/// </summary>
 public static class Localizer
 {
     private static readonly Dictionary<string, string> FallbackMap = new()
@@ -157,6 +160,9 @@ public static class Localizer
         ["DefaultMarkerName"] = "Marker {0}"
     };
 
+    /// <summary>
+    /// Gets localized string resource for <paramref name="key"/> with format arguments, falling back to english map.
+    /// </summary>
     public static string Get(string key, params object[] args)
     {
         string? str = null;
