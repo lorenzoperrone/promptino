@@ -5,7 +5,17 @@ namespace Promptino.App.Tests;
 public class MainWindowXamlTests
 {
     private static readonly XDocument Xaml = XDocument.Load(
-        Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Promptino.App", "MainWindow.axaml"));
+        Path.Combine(FindRepositoryRoot(), "Promptino.App", "MainWindow.axaml"));
+
+    private static string FindRepositoryRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, "Promptino.slnx")))
+        {
+            dir = dir.Parent;
+        }
+        return dir?.FullName ?? Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
+    }
 
     private static readonly XNamespace Av = "https://github.com/avaloniaui";
     private static readonly XNamespace X = "http://schemas.microsoft.com/winfx/2006/xaml";

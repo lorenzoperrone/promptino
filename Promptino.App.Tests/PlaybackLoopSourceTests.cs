@@ -4,7 +4,17 @@ namespace Promptino.App.Tests;
 
 public class PlaybackLoopSourceTests
 {
-    private static readonly string RepositoryRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
+    private static readonly string RepositoryRoot = FindRepositoryRoot();
+
+    private static string FindRepositoryRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, "Promptino.slnx")))
+        {
+            dir = dir.Parent;
+        }
+        return dir?.FullName ?? Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", ".."));
+    }
     private static readonly string MainWindowSource = File.ReadAllText(Path.Combine(RepositoryRoot, "Promptino.App", "MainWindow.axaml.cs"));
 
     [Fact]
