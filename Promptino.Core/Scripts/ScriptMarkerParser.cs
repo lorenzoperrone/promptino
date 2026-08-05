@@ -68,6 +68,8 @@ public sealed partial class ScriptMarkerParser
         if (string.IsNullOrWhiteSpace(rawContent))
             return markers;
 
+        rawContent = rawContent.Replace("\r\n", "\n");
+
         var matches = SubtitleTimestampRegex().Matches(rawContent);
         if (matches.Count == 0)
             return markers;

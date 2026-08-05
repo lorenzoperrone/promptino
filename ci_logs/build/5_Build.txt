@@ -1,0 +1,17 @@
+﻿2026-08-05T22:27:38.5351182Z ##[group]Run dotnet build Promptino.slnx -c Release --no-restore
+2026-08-05T22:27:38.5351749Z [36;1mdotnet build Promptino.slnx -c Release --no-restore[0m
+2026-08-05T22:27:38.5423356Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-08-05T22:27:38.5423724Z env:
+2026-08-05T22:27:38.5423962Z   DOTNET_ROOT: C:\Program Files\dotnet
+2026-08-05T22:27:38.5424222Z ##[endgroup]
+2026-08-05T22:27:49.6332828Z   Promptino.Platform -> D:\a\promptino\promptino\Promptino.Platform\bin\Release\net10.0\Promptino.Platform.dll
+2026-08-05T22:27:49.7168104Z   Promptino.Core -> D:\a\promptino\promptino\Promptino.Core\bin\Release\net10.0\Promptino.Core.dll
+2026-08-05T22:27:49.7633203Z   Promptino.Storage -> D:\a\promptino\promptino\Promptino.Storage\bin\Release\net10.0\Promptino.Storage.dll
+2026-08-05T22:27:54.3111115Z   Promptino.App -> D:\a\promptino\promptino\Promptino.App\bin\Release\net10.0\Promptino.App.dll
+2026-08-05T22:27:55.9535830Z   Promptino.App.Tests -> D:\a\promptino\promptino\Promptino.App.Tests\bin\Release\net10.0\Promptino.App.Tests.dll
+2026-08-05T22:27:55.9889200Z 
+2026-08-05T22:27:55.9900084Z Build succeeded.
+2026-08-05T22:27:55.9901815Z     0 Warning(s)
+2026-08-05T22:27:55.9902390Z     0 Error(s)
+2026-08-05T22:27:55.9903363Z 
+2026-08-05T22:27:55.9904477Z Time Elapsed 00:00:16.82

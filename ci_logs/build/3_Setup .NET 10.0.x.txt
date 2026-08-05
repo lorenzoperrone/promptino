@@ -1,0 +1,14 @@
+﻿2026-08-05T22:27:10.8576523Z ##[warning]Unexpected input(s) 'include-prerelease', valid inputs are ['dotnet-version', 'dotnet-quality', 'global-json-file', 'source-url', 'owner', 'config-file', 'cache', 'cache-dependency-path']
+2026-08-05T22:27:10.8590185Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-05T22:27:10.8592787Z ##[group]Run actions/setup-dotnet@v4
+2026-08-05T22:27:10.8593040Z with:
+2026-08-05T22:27:10.8593226Z   dotnet-version: 10.0.x
+2026-08-05T22:27:10.8593453Z   include-prerelease: true
+2026-08-05T22:27:10.8593677Z   cache: false
+2026-08-05T22:27:10.8593874Z ##[endgroup]
+2026-08-05T22:27:11.0396553Z (node:3928) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-08-05T22:27:11.0400814Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-08-05T22:27:11.1405969Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Runtime dotnet -Channel LTS
+2026-08-05T22:27:12.3332094Z dotnet-install: .NET Core Runtime with version '10.0.10' is already installed.
+2026-08-05T22:27:12.4959218Z [command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -Sta -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command & 'D:\a\_actions\actions\setup-dotnet\v4\externals\install-dotnet.ps1' -SkipNonVersionedFiles -Channel 10.0
+2026-08-05T22:27:13.2245232Z dotnet-install: .NET Core SDK with version '10.0.302' is already installed.
