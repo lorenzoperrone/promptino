@@ -26,7 +26,7 @@ jobs:
         run: dotnet build Promptino.slnx -c Release --no-restore
 
       - name: Run tests
-        run: dotnet test Promptino.App.Tests/Promptino.App.Tests.csproj -c Release --no-restore --no-build -v n
+        run: dotnet test Promptino.App.Tests/Promptino.App.Tests.csproj -c Release
 
       - name: Publish (self-contained win-x64)
         run: |
