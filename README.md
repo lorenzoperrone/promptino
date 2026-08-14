@@ -1,7 +1,7 @@
 # Promptino
 
 <p align="center">
-  <img src="graphical%20assets/bannergithub.png" alt="Promptino — Your tiny teleprompter overlay" width="100%">
+  <img src=".github/assets/promptino-banner.png" alt="Promptino — Your tiny teleprompter overlay" width="100%">
 </p>
 
 Promptino is a lightweight, clean, and customizable overlay teleprompter designed for video calls, presentations, and screen sharing. It floats above your active windows with adjustable transparency, allowing you to read your script smoothly while keeping eye contact with your camera.
