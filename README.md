@@ -4,7 +4,25 @@
   <img src=".github/assets/promptino-banner.png" alt="Promptino — Your tiny teleprompter overlay" width="100%">
 </p>
 
+<p align="center">
+  <a href="https://github.com/lorenzoperrone/promptino/actions/workflows/ci.yml"><img src="https://github.com/lorenzoperrone/promptino/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/lorenzoperrone/promptino/releases/latest"><img src="https://img.shields.io/github/v/release/lorenzoperrone/promptino" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/lorenzoperrone/promptino/releases/latest"><strong>Download Promptino for Windows</strong></a>
+  ·
+  <a href="https://github.com/lorenzoperrone/promptino/wiki">Documentation</a>
+</p>
+
 Promptino is a lightweight, clean, and customizable overlay teleprompter designed for video calls, presentations, and screen sharing. It floats above your active windows with adjustable transparency, allowing you to read your script smoothly while keeping eye contact with your camera.
+
+## Preview
+
+<p align="center">
+  <img src=".github/assets/promptino-screenshot.jpg" alt="Promptino teleprompter, control panel, and remote controller" width="100%">
+</p>
 
 ## Key Features
 
@@ -24,11 +42,19 @@ Promptino is a lightweight, clean, and customizable overlay teleprompter designe
 
 ## Quick Start
 
-1. Go to the latest Release page on GitHub and download the packaged files.
+1. Open the [latest release](https://github.com/lorenzoperrone/promptino/releases/latest) and download the Windows installer (`Promptino-<version>-setup.exe`).
 2. Launch `Promptino.App.exe`.
 3. Load a text file containing your script using the main control panel.
 4. Set your preferred reading speed, size, and theme.
 5. Press Play or use the configured hotkeys to start teleprompting.
+
+## Documentation
+
+- [Wiki Home](https://github.com/lorenzoperrone/promptino/wiki)
+- [Installation & Quick Start](https://github.com/lorenzoperrone/promptino/wiki/Installation-and-Quick-Start)
+- [User Guide](https://github.com/lorenzoperrone/promptino/wiki/User-Guide)
+- [Development & Architecture](https://github.com/lorenzoperrone/promptino/wiki/Development-and-Architecture)
+- [Architecture overview](ARCHITECTURE.md)
 
 ## Building from Source
 
